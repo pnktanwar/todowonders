@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -170,8 +171,13 @@ public class MainActivity extends Activity implements
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object listItem = lv.getItemAtPosition(position);
-                //Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
+                SQLiteCursor listItem = (SQLiteCursor)lv.getItemAtPosition(position);
+                Intent intent = new Intent(MainActivity.this, CreateToDo.class);
+                Bundle extras = intent.getExtras();
+                intent.putExtra(DbAdapter.KEY_ID, listItem.getInt(listItem.getColumnIndex(DbAdapter.KEY_ID)));
+                intent.putExtra(DbAdapter.KEY_TITLE, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_TITLE)));
+                intent.putExtra(DbAdapter.KEY_BODY, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_BODY)));
+                startActivity(intent);
             }
         });
     }

@@ -23,12 +23,23 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
     // DB Adapter
     private DbAdapter mDbHelper;
 
+    private int taskId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-
         setContentView(R.layout.create_todo);
+        Intent intent = getIntent();
+        this.taskId = intent.getIntExtra(DbAdapter.KEY_ID, -1);
+        String taskTitle = intent.getExtras().getString(DbAdapter.KEY_TITLE);
+        String taskDesc = intent.getExtras().getString(DbAdapter.KEY_BODY);
+
+        if ( this.taskId != -1 ) {
+            TextView titleView = (TextView)findViewById(R.id.titleText);
+            TextView descView = (TextView)findViewById(R.id.descText);
+            titleView.setText(taskTitle);
+            descView.setText(taskDesc);
+        }
 
         actionBar = getActionBar();
 
@@ -61,12 +72,19 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
         if ( title.trim().length() == 0 ) {
             Toast.makeText(getBaseContext(), getString(R.string.title_field_req), Toast.LENGTH_LONG).show();
         } else {
-            if ( mDbHelper.createNote(title, desc) == -1 ) {
+            long retVal = -1;
+            if ( this.taskId != -1 ) {
+                retVal = mDbHelper.updateNote(this.taskId, title, desc) ? 0 : -1;
+            } else {
+                retVal = mDbHelper.createNote(title, desc);
+            }
+            if ( retVal == -1 ) {
                 // Save failed case.
                 Toast.makeText(getBaseContext(), getString(R.string.create_todo_error), Toast.LENGTH_LONG).show();
             } else {
                 // Save successful.
                 Toast.makeText(getBaseContext(), getString(R.string.create_todo_success), Toast.LENGTH_LONG).show();
+                this.taskId = -1;
                 titleView.setText("");
                 descView.setText("");
             }
