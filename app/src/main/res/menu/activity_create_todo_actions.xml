@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- Create New Todo Button -->
+    <item android:id="@+id/action_create_todo"
+        android:icon="@drawable/ic_checkin"
+        android:title="@string/create_new_todo"
+        android:showAsAction="ifRoom" />
+
+</menu>

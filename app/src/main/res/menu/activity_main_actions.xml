@@ -6,6 +6,12 @@
           android:title="@string/action_search"
           android:showAsAction="ifRoom"
           android:actionViewClass="android.widget.SearchView"/>
+
+    <!-- Create New Todo -->
+    <item android:id="@+id/create_new_todo"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/create_new_todo"
+        android:showAsAction="ifRoom" />
     
     <!-- Location Found -->
     <item android:id="@+id/action_location_found"

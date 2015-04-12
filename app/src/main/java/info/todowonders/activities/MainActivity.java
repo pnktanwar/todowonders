@@ -5,16 +5,21 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.ListView;
+import android.widget.CursorAdapter;
+import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 
 import info.todowonders.activities.model.SpinnerNavItem;
+import info.todowonders.adapter.DbAdapter;
 import info.todowonders.info.actionbar.adapter.TitleNavigationAdapter;
 
 public class MainActivity extends Activity implements
@@ -31,6 +36,9 @@ public class MainActivity extends Activity implements
 
 	// Refresh menu item
 	private MenuItem refreshMenuItem;
+
+    // DB Adapter
+    private DbAdapter mDbHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +67,12 @@ public class MainActivity extends Activity implements
 
 		// assigning the spinner navigation
 		actionBar.setListNavigationCallbacks(adapter, this);
+
+        mDbHelper = new DbAdapter(this);
+        mDbHelper.open();
+
+        // Initialize ToDo list from DB.
+        initializeToDoList();
 
 		// Changing the action bar icon
 		// actionBar.setIcon(R.drawable.ico_actionbar);
@@ -105,6 +119,12 @@ public class MainActivity extends Activity implements
 		case R.id.action_check_updates:
 			// check for updates action
 			return true;
+
+        case R.id.create_new_todo:
+            Intent intent = new Intent(this, CreateToDo.class);
+            startActivity(intent);
+            return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -126,6 +146,24 @@ public class MainActivity extends Activity implements
 		// Action to be taken after selecting a spinner item
 		return false;
 	}
+
+
+    /*
+     * Initialize the list from DB.
+     */
+    private void initializeToDoList() {
+        // Get all of the notes from the database and create the item list
+        Cursor c = mDbHelper.fetchAllNotes();
+        startManagingCursor(c);
+        ListView lv = (ListView) findViewById(R.id.listView);
+        //SimpleAdapter list = new SimpleAdapter(this, planetsList, android.R.layout.simple_list_item_1, new String[] {"planet"}, new int[] {android.R.id.text1});
+        String[] from = new String[] { DbAdapter.KEY_TITLE };
+        int[] to = new int[] { R.id.title };
+
+        // Now create an array adapter and set it to display using our row
+        SimpleCursorAdapter notes = new SimpleCursorAdapter(this, R.layout.list_row, c, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        lv.setAdapter(notes);
+    }
 
 	/**
 	 * Async task to load the data from server
