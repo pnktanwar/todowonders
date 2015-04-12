@@ -17,10 +17,13 @@
     <string name="app_name">Action Bar</string>
     <string name="btn_send_message">Send Message</string>
     <string name="create_new_todo">Create New Task</string>
+    <string name="create_todo_error">Error while saving new task.</string>
+    <string name="create_todo_success">New task saved.</string>
     <string name="hello_world">Action Bar</string>
     <string name="lbl_for_desc">Description</string>
     <string name="lbl_for_title">Title</string>
     <string name="search_hint">Search color..</string>
+    <string name="title_field_req">Please provide a task title.</string>
     <!-- From: file:/Users/ptanwar/app/ToDoWonders/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">

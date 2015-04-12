@@ -76,10 +76,13 @@ public final class R {
         public static final int app_name=0x7f060008;
         public static final int btn_send_message=0x7f060009;
         public static final int create_new_todo=0x7f06000a;
-        public static final int hello_world=0x7f06000b;
-        public static final int lbl_for_desc=0x7f06000c;
-        public static final int lbl_for_title=0x7f06000d;
-        public static final int search_hint=0x7f06000e;
+        public static final int create_todo_error=0x7f06000b;
+        public static final int create_todo_success=0x7f06000c;
+        public static final int hello_world=0x7f06000d;
+        public static final int lbl_for_desc=0x7f06000e;
+        public static final int lbl_for_title=0x7f06000f;
+        public static final int search_hint=0x7f060010;
+        public static final int title_field_req=0x7f060011;
     }
     public static final class style {
         /** 

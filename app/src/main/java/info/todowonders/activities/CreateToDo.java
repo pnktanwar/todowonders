@@ -2,11 +2,13 @@ package info.todowonders.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import info.todowonders.adapter.DbAdapter;
 
@@ -24,15 +26,16 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+
         setContentView(R.layout.create_todo);
 
         actionBar = getActionBar();
 
         // Hide the action bar title
-        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
 
-        // Enabling Spinner dropdown navigation
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         mDbHelper = new DbAdapter(this);
         mDbHelper.open();
@@ -55,7 +58,19 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
         TextView descView = (TextView)findViewById(R.id.descText);
         String title = titleView.getText().toString();
         String desc = descView.getText().toString();
-        mDbHelper.createNote(title, desc);
+        if ( title.trim().length() == 0 ) {
+            Toast.makeText(getBaseContext(), getString(R.string.title_field_req), Toast.LENGTH_LONG).show();
+        } else {
+            if ( mDbHelper.createNote(title, desc) == -1 ) {
+                // Save failed case.
+                Toast.makeText(getBaseContext(), getString(R.string.create_todo_error), Toast.LENGTH_LONG).show();
+            } else {
+                // Save successful.
+                Toast.makeText(getBaseContext(), getString(R.string.create_todo_success), Toast.LENGTH_LONG).show();
+                titleView.setText("");
+                descView.setText("");
+            }
+        }
     }
 
 
@@ -66,6 +81,12 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
     public boolean onOptionsItemSelected(MenuItem item) {
         // Take appropriate action for each action item click
         switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
             case R.id.action_create_todo:
                 saveToDoItem();
                 return true;

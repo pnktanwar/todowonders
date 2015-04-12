@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
@@ -122,6 +125,7 @@ public class MainActivity extends Activity implements
 
         case R.id.create_new_todo:
             Intent intent = new Intent(this, CreateToDo.class);
+            //intent.putExtra("task_id", task_id);
             startActivity(intent);
             return true;
 
@@ -155,7 +159,7 @@ public class MainActivity extends Activity implements
         // Get all of the notes from the database and create the item list
         Cursor c = mDbHelper.fetchAllNotes();
         startManagingCursor(c);
-        ListView lv = (ListView) findViewById(R.id.listView);
+        final ListView lv = (ListView) findViewById(R.id.listView);
         //SimpleAdapter list = new SimpleAdapter(this, planetsList, android.R.layout.simple_list_item_1, new String[] {"planet"}, new int[] {android.R.id.text1});
         String[] from = new String[] { DbAdapter.KEY_TITLE };
         int[] to = new int[] { R.id.title };
@@ -163,6 +167,13 @@ public class MainActivity extends Activity implements
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter notes = new SimpleCursorAdapter(this, R.layout.list_row, c, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         lv.setAdapter(notes);
+        lv.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object listItem = lv.getItemAtPosition(position);
+                //Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 	/**
