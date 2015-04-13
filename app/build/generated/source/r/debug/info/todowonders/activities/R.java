@@ -31,14 +31,15 @@ public final class R {
         public static final int ico_actionbar=0x7f02000d;
     }
     public static final class id {
-        public static final int action_check_updates=0x7f090010;
-        public static final int action_create_todo=0x7f09000b;
-        public static final int action_help=0x7f09000f;
-        public static final int action_location_found=0x7f09000d;
-        public static final int action_refresh=0x7f09000e;
-        public static final int action_search=0x7f09000c;
-        public static final int action_settings=0x7f090011;
+        public static final int action_check_updates=0x7f090011;
+        public static final int action_create_todo=0x7f09000c;
+        public static final int action_help=0x7f090010;
+        public static final int action_location_found=0x7f09000e;
+        public static final int action_refresh=0x7f09000f;
+        public static final int action_search=0x7f09000d;
+        public static final int action_settings=0x7f090012;
         public static final int create_new_todo=0x7f090003;
+        public static final int desc=0x7f09000b;
         public static final int descText=0x7f090007;
         public static final int imgIcon=0x7f090008;
         public static final int lbl_for_desc=0x7f090006;
@@ -58,6 +59,7 @@ public final class R {
         public static final int create_todo=0x7f030004;
         public static final int list_item_title_navigation=0x7f030005;
         public static final int list_row=0x7f030006;
+        public static final int list_row_desc=0x7f030007;
     }
     public static final class menu {
         public static final int activity_create_todo_actions=0x7f080000;

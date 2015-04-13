@@ -162,11 +162,11 @@ public class MainActivity extends Activity implements
         startManagingCursor(c);
         final ListView lv = (ListView) findViewById(R.id.listView);
         //SimpleAdapter list = new SimpleAdapter(this, planetsList, android.R.layout.simple_list_item_1, new String[] {"planet"}, new int[] {android.R.id.text1});
-        String[] from = new String[] { DbAdapter.KEY_TITLE };
-        int[] to = new int[] { R.id.title };
+        String[] from = new String[] { DbAdapter.KEY_TITLE, DbAdapter.KEY_BODY };
+        int[] to = new int[] { android.R.id.text1, android.R.id.text2 };
 
         // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter notes = new SimpleCursorAdapter(this, R.layout.list_row, c, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        SimpleCursorAdapter notes = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, c, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         lv.setAdapter(notes);
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
