@@ -28,5 +28,7 @@
     <string name="create_todo_success">Task data saved.</string>
     <string name="create_todo_error">Error while saving new task.</string>
     <string name="title_field_req">Please provide a task title.</string>
+    <string name="delete_todo">Delete Task</string>
+    <string name="tasks_selected">%1$d tasks selected.</string>
 
 </resources>

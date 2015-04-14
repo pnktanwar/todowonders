@@ -9,6 +9,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,10 +30,15 @@ import info.todowonders.adapter.DbAdapter;
 import info.todowonders.info.actionbar.adapter.TitleNavigationAdapter;
 
 public class MainActivity extends Activity implements
-		ActionBar.OnNavigationListener {
+		ActionBar.OnNavigationListener, ActionMode.Callback {
 
 	// action bar
 	private ActionBar actionBar;
+
+    private int selectedCount = 0;
+
+    // Selection Mode or default mode.
+    protected ActionMode mActionMode;
 
 	// Title navigation Spinner data
 	private ArrayList<SpinnerNavItem> navSpinner;
@@ -43,6 +51,8 @@ public class MainActivity extends Activity implements
 
     // DB Adapter
     private DbAdapter mDbHelper;
+
+    ListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +140,10 @@ public class MainActivity extends Activity implements
             startActivity(intent);
             return true;
 
+        case R.id.delete_todo:
+            Log.e("dsaf", "sdafsaddfsfd9999");
+            return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -159,28 +173,127 @@ public class MainActivity extends Activity implements
     private void initializeToDoList() {
         // Get all of the notes from the database and create the item list
         Cursor c = mDbHelper.fetchAllNotes();
+        listView = (ListView) findViewById(R.id.listView);
+        final ListView lv = listView;
         startManagingCursor(c);
-        final ListView lv = (ListView) findViewById(R.id.listView);
-        //SimpleAdapter list = new SimpleAdapter(this, planetsList, android.R.layout.simple_list_item_1, new String[] {"planet"}, new int[] {android.R.id.text1});
         String[] from = new String[] { DbAdapter.KEY_TITLE, DbAdapter.KEY_BODY };
-        int[] to = new int[] { android.R.id.text1, android.R.id.text2 };
-
+        int[] to = new int[] { R.id.firstLineTitle, R.id.secondLineDesc };
         // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter notes = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, c, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        SimpleCursorAdapter notes = new SimpleCursorAdapter(this, R.layout.todo_list, c, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         lv.setAdapter(notes);
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SQLiteCursor listItem = (SQLiteCursor)lv.getItemAtPosition(position);
-                Intent intent = new Intent(MainActivity.this, CreateToDo.class);
-                Bundle extras = intent.getExtras();
-                intent.putExtra(DbAdapter.KEY_ID, listItem.getInt(listItem.getColumnIndex(DbAdapter.KEY_ID)));
-                intent.putExtra(DbAdapter.KEY_TITLE, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_TITLE)));
-                intent.putExtra(DbAdapter.KEY_BODY, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_BODY)));
-                startActivity(intent);
+                if ( mActionMode == null ) {
+                    SQLiteCursor listItem = (SQLiteCursor)lv.getItemAtPosition(position);
+                    Intent intent = new Intent(MainActivity.this, CreateToDo.class);
+                    Bundle extras = intent.getExtras();
+                    intent.putExtra(DbAdapter.KEY_ID, listItem.getInt(listItem.getColumnIndex(DbAdapter.KEY_ID)));
+                    intent.putExtra(DbAdapter.KEY_TITLE, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_TITLE)));
+                    intent.putExtra(DbAdapter.KEY_BODY, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_BODY)));
+                    startActivity(intent);
+                } else {
+                    toggleViewSelection(view, id, position);
+                }
+            }
+        });
+
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // Start the CAB using the ActionMode.Callback defined above
+                mActionMode = MainActivity.this.startActionMode(MainActivity.this);
+                toggleViewSelection(view, id, position);
+                return true;
             }
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+     * ActionMode callbacks implementation
+     */
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        // TODO Auto-generated method stub
+        mode.getMenuInflater().inflate(R.menu.todo_selection_mode, menu);
+        return true;
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        destroyActionMode();
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        // TODO Auto-generated method stub
+
+        mode.setTitle(getString(R.string.tasks_selected, selectedCount));
+        return false;
+    }
+
+
+    private void setSelectionCount(int count) {
+        if ( mActionMode != null ) {
+            this.selectedCount = count;
+            mActionMode.setTitle(getString(R.string.tasks_selected, selectedCount));
+        }
+    }
+
+    private void toggleViewSelection(View view, long id, int position) {
+        long[] checkedIds = listView.getCheckedItemIds();
+        setSelectionCount(checkedIds.length);
+    }
+
+
+    public void deleteToDos(MenuItem menuItem) {
+        SparseBooleanArray checked = listView.getCheckedItemPositions();
+        for (int i = 0; i < listView.getCount(); i++) {
+            if ( checked.get(i) ) {
+                SQLiteCursor listItem = (SQLiteCursor)listView.getItemAtPosition(i);
+                int recId = listItem.getInt(listItem.getColumnIndex(DbAdapter.KEY_ID));
+                mDbHelper.deleteNote(recId);
+            }
+        }
+        initializeToDoList();
+        mActionMode.finish();
+        destroyActionMode();
+    }
+
+
+
+    private void destroyActionMode() {
+        mActionMode = null;
+        selectedCount = 0;
+        listView.invalidateViews();
+        listView.clearChoices();
+        for (int i = 0; i < listView.getCount(); i++) {
+            listView.setItemChecked(i, false);
+        }
+    }
+
+
+
+
 
 	/**
 	 * Async task to load the data from server

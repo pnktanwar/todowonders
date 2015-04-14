@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Create New Todo -->
+    <item android:id="@+id/delete_todo"
+        android:icon="@drawable/ic_action_discard"
+        android:title="@string/delete_todo"
+        android:onClick="deleteToDos"
+        android:showAsAction="ifRoom" />
+</menu>
+<!-- From: file:/Users/ptanwar/app/ToDoWonders/app/src/main/res/menu/todo_selection_mode.xml -->

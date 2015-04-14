@@ -31,14 +31,17 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
         setContentView(R.layout.create_todo);
         Intent intent = getIntent();
         this.taskId = intent.getIntExtra(DbAdapter.KEY_ID, -1);
-        String taskTitle = intent.getExtras().getString(DbAdapter.KEY_TITLE);
-        String taskDesc = intent.getExtras().getString(DbAdapter.KEY_BODY);
+        Bundle intentExtras = intent.getExtras();
+        if ( intentExtras != null ) {
+            String taskTitle = intent.getExtras().getString(DbAdapter.KEY_TITLE);
+            String taskDesc = intent.getExtras().getString(DbAdapter.KEY_BODY);
 
-        if ( this.taskId != -1 ) {
-            TextView titleView = (TextView)findViewById(R.id.titleText);
-            TextView descView = (TextView)findViewById(R.id.descText);
-            titleView.setText(taskTitle);
-            descView.setText(taskDesc);
+            if (this.taskId != -1) {
+                TextView titleView = (TextView) findViewById(R.id.titleText);
+                TextView descView = (TextView) findViewById(R.id.descText);
+                titleView.setText(taskTitle);
+                descView.setText(taskDesc);
+            }
         }
 
         actionBar = getActionBar();
