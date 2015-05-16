@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -141,7 +140,6 @@ public class MainActivity extends Activity implements
             return true;
 
         case R.id.delete_todo:
-            Log.e("dsaf", "sdafsaddfsfd9999");
             return true;
 
 		default:
@@ -176,7 +174,7 @@ public class MainActivity extends Activity implements
         listView = (ListView) findViewById(R.id.listView);
         final ListView lv = listView;
         startManagingCursor(c);
-        String[] from = new String[] { DbAdapter.KEY_TITLE, DbAdapter.KEY_BODY };
+        String[] from = new String[] { DbAdapter.KEY_TITLE, DbAdapter.KEY_BODY, DbAdapter.KEY_REMINDER_AT };
         int[] to = new int[] { R.id.firstLineTitle, R.id.secondLineDesc };
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter notes = new SimpleCursorAdapter(this, R.layout.todo_list, c, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
@@ -191,6 +189,7 @@ public class MainActivity extends Activity implements
                     intent.putExtra(DbAdapter.KEY_ID, listItem.getInt(listItem.getColumnIndex(DbAdapter.KEY_ID)));
                     intent.putExtra(DbAdapter.KEY_TITLE, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_TITLE)));
                     intent.putExtra(DbAdapter.KEY_BODY, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_BODY)));
+                    intent.putExtra(DbAdapter.KEY_REMINDER_AT, listItem.getString(listItem.getColumnIndex(DbAdapter.KEY_REMINDER_AT)));
                     startActivity(intent);
                 } else {
                     toggleViewSelection(view, id, position);

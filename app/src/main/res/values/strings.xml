@@ -4,31 +4,23 @@
     <string name="app_name">ToDoWonders</string>
     <string name="action_settings">Settings</string>
     <string name="btn_send_message">Send Message</string>
-
-
     <string name="create_new_todo">Create New Task</string>
-
-    <!-- Activity titles -->    
     <string name="activity_location_found">Location Found</string>
-    
-    <!-- Action Bar action items -->
     <string name="action_search">Sarch</string>
     <string name="action_location_found">Location Found</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_contacts">Contacts</string>
     <string name="action_help">Help</string>
     <string name="action_check_updates">Check for Updates</string>
-    
-    <!-- Search  -->
     <string name="search_hint">Search color..</string>
-
     <string name="lbl_for_title">Title</string>
     <string name="lbl_for_desc">Description</string>
-
     <string name="create_todo_success">Task data saved.</string>
     <string name="create_todo_error">Error while saving new task.</string>
     <string name="title_field_req">Please provide a task title.</string>
     <string name="delete_todo">Delete Task</string>
     <string name="tasks_selected">%1$d tasks selected.</string>
+    <string name="setDateTimeLbl">Set date time for reminder.</string>
+    <string name="dateTimeDialogTitle">Select Date and Time</string>
 
 </resources>
