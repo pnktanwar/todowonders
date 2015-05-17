@@ -8,6 +8,21 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
+    <service
+        android:name="info.todowonders.activities.MyAlarmService"
+        android:enabled="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -17,11 +32,14 @@
             android:name="info.todowonders.activities.CreateToDo"
             android:label="@string/app_name" />
         <activity
+            android:name="info.todowonders.activities.ReminderActivity"
+            android:label="@string/app_name" />
+        <activity
             android:name="info.todowonders.activities.MainActivity"
             android:label="@string/app_name" >
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".SearchResultsActivity" />
+                android:value="info.todowonders.SearchResultsActivity" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,6 +72,8 @@
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
         </activity>
+
+        <receiver android:name="info.todowonders.receivers.AlarmReceiver" />
     </application>
 
 </manifest>

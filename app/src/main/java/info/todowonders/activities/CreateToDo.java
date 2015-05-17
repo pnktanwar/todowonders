@@ -2,10 +2,14 @@ package info.todowonders.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +27,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import info.todowonders.R;
 import info.todowonders.adapter.DbAdapter;
+import info.todowonders.receivers.AlarmReceiver;
 
 /**
  * Created by ptanwar on 12/04/15.
@@ -42,11 +48,13 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
 
     private CheckBox chkDateTimeReminder;
     private Dialog dateTimeDialog;
+    private AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_todo);
+        alarmManager = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
         initializeDateTimeDialog();
         addListenerForSettingDateTime();
         Intent intent = getIntent();
@@ -58,6 +66,7 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
             String reminderAt = intent.getExtras().getString(DbAdapter.KEY_REMINDER_AT);
 
             if (this.taskId != -1) {
+                Log.e("Task Id", "Task Id = " + this.taskId);
                 TextView titleView = (TextView) findViewById(R.id.titleText);
                 TextView descView = (TextView) findViewById(R.id.descText);
                 titleView.setText(taskTitle);
@@ -113,6 +122,7 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
         String title = titleView.getText().toString();
         String desc = descView.getText().toString();
         Calendar reminderAt = getReminderDateTime();
+        boolean isScheduled = chkDateTimeReminder.isChecked();
         if ( title.trim().length() == 0 ) {
             Toast.makeText(getBaseContext(), getString(R.string.title_field_req), Toast.LENGTH_LONG).show();
         } else {
@@ -128,14 +138,26 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
             } else {
                 // Save successful.
                 Toast.makeText(getBaseContext(), getString(R.string.create_todo_success), Toast.LENGTH_LONG).show();
-                this.taskId = -1;
                 titleView.setText("");
                 descView.setText("");
                 chkDateTimeReminder.setChecked(false);
                 TextView remindAtLbl = ((TextView) findViewById(R.id.remind_at_lbl));
                 remindAtLbl.setText("");
+                if ( isScheduled ) {
+                    scheduleAlarm(this.taskId == -1 ? retVal : this.taskId, reminderAt);
+                }
+                this.taskId = -1;
             }
         }
+    }
+
+
+    private void scheduleAlarm(long taskId, Calendar reminderAt) {
+        Intent alarmIntent = new Intent(CreateToDo.this, AlarmReceiver.class);
+        Bundle extras = alarmIntent.getExtras();
+        alarmIntent.putExtra(DbAdapter.KEY_ID, taskId);
+        PendingIntent pi = PendingIntent.getBroadcast( this, 0, alarmIntent, 0 );
+        alarmManager.set(AlarmManager.RTC_WAKEUP, reminderAt.getTimeInMillis(), pi);
     }
 
 

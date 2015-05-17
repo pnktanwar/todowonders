@@ -22,5 +22,9 @@
     <string name="tasks_selected">%1$d tasks selected.</string>
     <string name="setDateTimeLbl">Set date time for reminder.</string>
     <string name="dateTimeDialogTitle">Select Date and Time</string>
+    <string name="reminderLbl">ToDoWonders Reminder</string>
+    <string name="title_activity_alarm_broadcast_receiver">AlarmBroadcastReceiverActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import info.todowonders.R;
 
 public class SearchResultsActivity extends Activity {
 

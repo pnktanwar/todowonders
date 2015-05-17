@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="info.todowonders.activities"
+    package="info.todowonders"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -8,18 +8,34 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:label="@string/app_name" android:name="info.todowonders.activities.CreateToDo"/>
+        <activity
+            android:name="info.todowonders.activities.CreateToDo"
+            android:label="@string/app_name" />
+        <activity
+            android:name="info.todowonders.activities.ReminderActivity"
+            android:label="@string/app_name" />
         <activity
             android:name="info.todowonders.activities.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".SearchResultsActivity" />
+                android:value="info.todowonders.SearchResultsActivity" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +44,8 @@
         </activity>
 
         <!-- Search results activity -->
-        <activity android:name="info.todowonders.activities.SearchResultsActivity"
+        <activity
+            android:name="info.todowonders.activities.SearchResultsActivity"
             android:parentActivityName="info.todowonders.activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -44,10 +61,17 @@
             android:name="info.todowonders.activities.LocationFound"
             android:label="@string/activity_location_found"
             android:parentActivityName="info.todowonders.activities.MainActivity" >
+
             <!-- To support split activities below API Level 14 -->
-            <meta-data android:name="android.support.UI_OPTIONS"
-                   android:value="splitActionBarWhenNarrow" />
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
         </activity>
+        <receiver android:name="info.todowonders.receivers.AlarmReceiver"></receiver>
     </application>
+
+    <service android:name="info.todowonders.activities.MyAlarmService" android:enabled="true" />
+
+
 
 </manifest>

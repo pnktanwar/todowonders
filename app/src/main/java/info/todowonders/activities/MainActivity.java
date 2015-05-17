@@ -23,7 +23,7 @@ import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
-
+import info.todowonders.R;
 import info.todowonders.activities.model.SpinnerNavItem;
 import info.todowonders.adapter.DbAdapter;
 import info.todowonders.info.actionbar.adapter.TitleNavigationAdapter;

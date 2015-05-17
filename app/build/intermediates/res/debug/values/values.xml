@@ -122,11 +122,14 @@
     <string name="create_todo_success">Task data saved.</string>
     <string name="dateTimeDialogTitle">Select Date and Time</string>
     <string name="delete_todo">Delete Task</string>
+    <string name="hello_world">Hello world!</string>
     <string name="lbl_for_desc">Description</string>
     <string name="lbl_for_title">Title</string>
+    <string name="reminderLbl">ToDoWonders Reminder</string>
     <string name="search_hint">Search color..</string>
     <string name="setDateTimeLbl">Set date time for reminder.</string>
     <string name="tasks_selected">%1$d tasks selected.</string>
+    <string name="title_activity_alarm_broadcast_receiver">AlarmBroadcastReceiverActivity</string>
     <string name="title_field_req">Please provide a task title.</string>
     <!-- From: file:/Users/ptanwar/app/ToDoWonders/app/src/main/res/values/styles.xml -->
     <eat-comment/>

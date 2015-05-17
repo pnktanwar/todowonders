@@ -4,6 +4,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
+import info.todowonders.R;
+
 public class LocationFound  extends Activity {
 
 	@Override

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package info.todowonders.activities;
+package info.todowonders;
 
 public final class R {
     public static final class attr {
@@ -135,19 +135,20 @@ public final class R {
         public static final int list_selector=0x7f020010;
     }
     public static final class id {
-        public static final int action_check_updates=0x7f0a0016;
-        public static final int action_create_todo=0x7f0a0011;
-        public static final int action_help=0x7f0a0015;
-        public static final int action_location_found=0x7f0a0013;
-        public static final int action_refresh=0x7f0a0014;
-        public static final int action_search=0x7f0a0012;
-        public static final int action_settings=0x7f0a0017;
+        public static final int action_check_updates=0x7f0a0018;
+        public static final int action_create_todo=0x7f0a0013;
+        public static final int action_help=0x7f0a0017;
+        public static final int action_location_found=0x7f0a0015;
+        public static final int action_refresh=0x7f0a0016;
+        public static final int action_search=0x7f0a0014;
+        public static final int action_settings=0x7f0a0019;
         public static final int chkDateTimeReminder=0x7f0a0008;
         public static final int create_new_todo=0x7f0a0003;
         public static final int datePickerDlg=0x7f0a000b;
-        public static final int delete_todo=0x7f0a0018;
+        public static final int delete_todo=0x7f0a001a;
+        public static final int desc=0x7f0a000f;
         public static final int descText=0x7f0a0007;
-        public static final int firstLineTitle=0x7f0a0010;
+        public static final int firstLineTitle=0x7f0a0012;
         public static final int imgIcon=0x7f0a000d;
         public static final int lbl_for_desc=0x7f0a0006;
         public static final int lbl_for_title=0x7f0a0004;
@@ -155,8 +156,9 @@ public final class R {
         public static final int listView=0x7f0a0001;
         public static final int progressBar=0x7f0a0000;
         public static final int remind_at_lbl=0x7f0a0009;
-        public static final int secondLineDesc=0x7f0a000f;
+        public static final int secondLineDesc=0x7f0a0011;
         public static final int timePickerDlg=0x7f0a000c;
+        public static final int title=0x7f0a0010;
         public static final int titleText=0x7f0a0005;
         public static final int txtQuery=0x7f0a0002;
         public static final int txtTitle=0x7f0a000e;
@@ -169,13 +171,15 @@ public final class R {
         public static final int create_todo=0x7f030004;
         public static final int date_time_picker=0x7f030005;
         public static final int list_item_title_navigation=0x7f030006;
-        public static final int todo_list=0x7f030007;
+        public static final int reminder_dialog=0x7f030007;
+        public static final int todo_list=0x7f030008;
     }
     public static final class menu {
         public static final int activity_create_todo_actions=0x7f090000;
         public static final int activity_main_actions=0x7f090001;
         public static final int main=0x7f090002;
-        public static final int todo_selection_mode=0x7f090003;
+        public static final int menu_alarm_broadcast_receiver=0x7f090003;
+        public static final int todo_selection_mode=0x7f090004;
     }
     public static final class string {
         public static final int action_check_updates=0x7f070000;
@@ -193,12 +197,15 @@ public final class R {
         public static final int create_todo_success=0x7f07000c;
         public static final int dateTimeDialogTitle=0x7f07000d;
         public static final int delete_todo=0x7f07000e;
-        public static final int lbl_for_desc=0x7f07000f;
-        public static final int lbl_for_title=0x7f070010;
-        public static final int search_hint=0x7f070011;
-        public static final int setDateTimeLbl=0x7f070012;
-        public static final int tasks_selected=0x7f070013;
-        public static final int title_field_req=0x7f070014;
+        public static final int hello_world=0x7f07000f;
+        public static final int lbl_for_desc=0x7f070010;
+        public static final int lbl_for_title=0x7f070011;
+        public static final int reminderLbl=0x7f070012;
+        public static final int search_hint=0x7f070013;
+        public static final int setDateTimeLbl=0x7f070014;
+        public static final int tasks_selected=0x7f070015;
+        public static final int title_activity_alarm_broadcast_receiver=0x7f070016;
+        public static final int title_field_req=0x7f070017;
     }
     public static final class style {
         /** 
