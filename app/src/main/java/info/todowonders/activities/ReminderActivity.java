@@ -5,9 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import info.todowonders.R;
 import info.todowonders.adapter.DbAdapter;
@@ -32,7 +30,6 @@ public class ReminderActivity extends Activity {
         initializeDbHelper();
         initializeTaskDetails();
         initializeDialog();
-        Toast.makeText(this, "I'm running : " + taskId, Toast.LENGTH_LONG).show();
     }
 
     private void initializeDbHelper() {
@@ -44,7 +41,6 @@ public class ReminderActivity extends Activity {
     private void initializeTaskDetails() {
         Bundle intentExtras = this.intent.getExtras();
         this.taskId = intent.getExtras().getLong(DbAdapter.KEY_ID);
-        Log.e("Here is the task detail", "TaskId : " + taskId);
         Cursor rowCursor = mDbHelper.fetchNote(taskId);
         this.title = rowCursor.getString(rowCursor.getColumnIndex(DbAdapter.KEY_TITLE));
         this.body = rowCursor.getString(rowCursor.getColumnIndex(DbAdapter.KEY_BODY));

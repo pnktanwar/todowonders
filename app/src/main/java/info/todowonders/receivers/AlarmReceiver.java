@@ -17,7 +17,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context ctx, Intent intent) {
-        Log.e("Received HERE", "Received alarm here : ");
         Bundle intentExtras = intent.getExtras();
         long taskId = intent.getExtras().getLong(DbAdapter.KEY_ID);
         //Toast.makeText(ctx, "I'm running : " + taskId, Toast.LENGTH_LONG).show();

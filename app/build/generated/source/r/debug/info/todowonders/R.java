@@ -146,7 +146,7 @@ public final class R {
         public static final int create_new_todo=0x7f0a0003;
         public static final int datePickerDlg=0x7f0a000b;
         public static final int delete_todo=0x7f0a001a;
-        public static final int desc=0x7f0a000f;
+        public static final int desc=0x7f0a0010;
         public static final int descText=0x7f0a0007;
         public static final int firstLineTitle=0x7f0a0012;
         public static final int imgIcon=0x7f0a000d;
@@ -158,7 +158,7 @@ public final class R {
         public static final int remind_at_lbl=0x7f0a0009;
         public static final int secondLineDesc=0x7f0a0011;
         public static final int timePickerDlg=0x7f0a000c;
-        public static final int title=0x7f0a0010;
+        public static final int title=0x7f0a000f;
         public static final int titleText=0x7f0a0005;
         public static final int txtQuery=0x7f0a0002;
         public static final int txtTitle=0x7f0a000e;
@@ -220,6 +220,7 @@ public final class R {
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
+        public static final int Theme_Transparent=0x7f080002;
     }
     public static final class xml {
         public static final int searchable=0x7f040000;

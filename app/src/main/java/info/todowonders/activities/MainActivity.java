@@ -57,33 +57,8 @@ public class MainActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		actionBar = getActionBar();
-
-		// Hide the action bar title
-		actionBar.setDisplayShowTitleEnabled(false);
-
-		// Enabling Spinner dropdown navigation
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
-		// Spinner title navigation data
-		navSpinner = new ArrayList<SpinnerNavItem>();
-		navSpinner.add(new SpinnerNavItem("Local", R.drawable.ic_location));
-		navSpinner
-				.add(new SpinnerNavItem("My Places", R.drawable.ic_my_places));
-		navSpinner.add(new SpinnerNavItem("Checkins", R.drawable.ic_checkin));
-		navSpinner.add(new SpinnerNavItem("Latitude", R.drawable.ic_latitude));
-
-		// title drop down adapter
-		adapter = new TitleNavigationAdapter(getApplicationContext(),
-				navSpinner);
-
-		// assigning the spinner navigation
-		actionBar.setListNavigationCallbacks(adapter, this);
-
-        mDbHelper = new DbAdapter(this);
-        mDbHelper.open();
-
+        setupActionBar();
+        setupDBHelper();
         // Initialize ToDo list from DB.
         initializeToDoList();
 
@@ -95,14 +70,10 @@ public class MainActivity extends Activity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.activity_main_actions, menu);
-
 		// Associate searchable configuration with the SearchView
 		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
-				.getActionView();
-		searchView.setSearchableInfo(searchManager
-				.getSearchableInfo(getComponentName()));
-
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -288,6 +259,39 @@ public class MainActivity extends Activity implements
         for (int i = 0; i < listView.getCount(); i++) {
             listView.setItemChecked(i, false);
         }
+    }
+
+
+
+
+
+    private void setupActionBar() {
+        actionBar = getActionBar();
+
+        // Hide the action bar title
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        // Enabling Spinner dropdown navigation
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
+        // Spinner title navigation data
+        navSpinner = new ArrayList<SpinnerNavItem>();
+        navSpinner.add(new SpinnerNavItem("Local", R.drawable.ic_location));
+        navSpinner.add(new SpinnerNavItem("My Places", R.drawable.ic_my_places));
+        navSpinner.add(new SpinnerNavItem("Checkins", R.drawable.ic_checkin));
+        navSpinner.add(new SpinnerNavItem("Latitude", R.drawable.ic_latitude));
+
+        // title drop down adapter
+        adapter = new TitleNavigationAdapter(getApplicationContext(), navSpinner);
+
+        // assigning the spinner navigation
+        actionBar.setListNavigationCallbacks(adapter, this);
+    }
+
+
+    private void setupDBHelper() {
+        mDbHelper = new DbAdapter(this);
+        mDbHelper.open();
     }
 
 
