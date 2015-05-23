@@ -137,7 +137,7 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
                 Toast.makeText(getBaseContext(), getString(R.string.create_todo_error), Toast.LENGTH_LONG).show();
             } else {
                 // Save successful.
-                Toast.makeText(getBaseContext(), getString(R.string.create_todo_success), Toast.LENGTH_LONG).show();
+                /*Toast.makeText(getBaseContext(), getString(R.string.create_todo_success), Toast.LENGTH_LONG).show();
                 titleView.setText("");
                 descView.setText("");
                 chkDateTimeReminder.setChecked(false);
@@ -146,7 +146,9 @@ public class CreateToDo extends Activity implements ActionBar.OnNavigationListen
                 if ( isScheduled ) {
                     scheduleAlarm(this.taskId == -1 ? retVal : this.taskId, reminderAt);
                 }
-                this.taskId = -1;
+                this.taskId = -1;*/
+                Toast.makeText(getBaseContext(), getString(R.string.create_todo_success), Toast.LENGTH_LONG).show();
+                this.finish();
             }
         }
     }

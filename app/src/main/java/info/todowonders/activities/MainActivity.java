@@ -23,6 +23,7 @@ import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
+
 import info.todowonders.R;
 import info.todowonders.activities.model.SpinnerNavItem;
 import info.todowonders.adapter.DbAdapter;
@@ -204,7 +205,12 @@ public class MainActivity extends Activity implements
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         // TODO Auto-generated method stub
-        mode.getMenuInflater().inflate(R.menu.todo_selection_mode, menu);
+        //if (Build.VERSION.SDK_INT > 15) {
+        //    mode.getMenuInflater().inflate(R.menu.todo_selection_mode, menu);
+        //} else {
+            new MenuInflater(this).inflate(R.menu.todo_selection_mode, menu);
+        //}
+
         return true;
     }
 
@@ -233,7 +239,6 @@ public class MainActivity extends Activity implements
         long[] checkedIds = listView.getCheckedItemIds();
         setSelectionCount(checkedIds.length);
     }
-
 
     public void deleteToDos(MenuItem menuItem) {
         SparseBooleanArray checked = listView.getCheckedItemPositions();
