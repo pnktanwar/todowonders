@@ -4,24 +4,40 @@
     android:background="@drawable/list_selector"
     android:padding="6dip" >
 
+    <!-- ListRow Left side Thumbnail image -->
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+        <ImageView
+            android:id="@+id/img"
+            android:src="@drawable/todo_manager"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/secondLineDesc"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/thumbnail"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Description"
+        android:textColor="#888888"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/firstLineTitle"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/secondLineDesc"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/thumbnail"
         android:layout_alignWithParentIfMissing="true"
         android:gravity="center_vertical"
         android:text="Title"
