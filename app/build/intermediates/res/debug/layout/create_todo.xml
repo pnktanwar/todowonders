@@ -22,7 +22,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/titleText"
@@ -35,8 +35,7 @@
         android:labelFor="@+id/lbl_for_title"
         android:layout_marginBottom="32dp"
         android:layout_weight="0.07"
-        android:minHeight="50dp"
-        android:minLines="3" />
+        android:minHeight="50dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +47,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/descText"
@@ -61,8 +60,7 @@
         android:labelFor="@+id/lbl_for_title"
         android:layout_marginBottom="32dp"
         android:layout_weight="0.07"
-        android:minHeight="50dp"
-        android:minLines="3" />
+        android:maxLines="8" />
 
 
     <CheckBox
