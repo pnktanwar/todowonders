@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -18,9 +19,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -28,9 +31,13 @@ import info.todowonders.R;
 import info.todowonders.activities.model.SpinnerNavItem;
 import info.todowonders.adapter.DbAdapter;
 import info.todowonders.info.actionbar.adapter.TitleNavigationAdapter;
+import info.todowonders.utils.DownloadImageTask;
+import info.todowonders.utils.MyProfile;
 
 public class MainActivity extends Activity implements
 		ActionBar.OnNavigationListener, ActionMode.Callback {
+
+    private static final String TAG = MainActivity.class.getName();
 
 	// action bar
 	private ActionBar actionBar;
@@ -58,14 +65,27 @@ public class MainActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+        setupProfileInfo();
         setupActionBar();
         setupDBHelper();
         // Initialize ToDo list from DB.
         initializeToDoList();
 
+
 		// Changing the action bar icon
 		// actionBar.setIcon(R.drawable.ico_actionbar);
 	}
+
+
+    private void setupProfileInfo() {
+        String name = MyProfile.getName();
+        String profileImg = MyProfile.getProfileImg();
+        Log.e(TAG, "ProfileImg :: " + profileImg);
+        TextView welcomeMsg = (TextView)findViewById(R.id.welcome_msg);
+        ImageView userPicture = (ImageView)findViewById(R.id.userpicture);
+        new DownloadImageTask(  userPicture).execute(profileImg);
+        welcomeMsg.setText("Welcome " + name + ", ");
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

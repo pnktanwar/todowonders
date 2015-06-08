@@ -2,11 +2,46 @@
 <items version="2" >
 
     <item
-        jar="/Users/ptanwar/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        jar="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.1.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
-        <dex dex="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-6bd2db12f29331604ea533de1067f67e792113fb.jar" />
+        sha1="a78bfd2ec508b123ee7c03f4006ba7996ef9a8dc">
+        <dex dex="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/pre-dexed/debug/classes-99d17c2b2088550dc452bfcf84bbd53e501cc48d.jar" />
+    </item>
+    <item
+        jar="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-34c451b879d06acfc5218296238c7cbca928662a.jar" />
+    </item>
+    <item
+        jar="/Users/ptanwar/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-7adf20dbc42292d5537a0ad97cf9f7107f06f10c.jar" />
+    </item>
+    <item
+        jar="/Users/ptanwar/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-49946d90678f9015f22e44305235ca944d372954.jar" />
+    </item>
+    <item
+        jar="/Users/ptanwar/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-0ed18052755405dd298c4c9421b0e014b7b08731.jar" />
+    </item>
+    <item
+        jar="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/ptanwar/app/ToDoWonders/app/build/intermediates/pre-dexed/debug/classes-12aba0adacfb2a93d93676168e0eb0fb4468ee4b.jar" />
     </item>
 
 </items>

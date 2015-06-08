@@ -9,9 +9,34 @@
     tools:context=".MainActivity"
     android:background="@color/material_grey_50" >
 
+    <LinearLayout
+        android:id="@+id/profilepic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+        <ImageView
+            android:id="@+id/userpicture"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/welcome_msg"
+        android:textSize="16sp"
+        android:layout_toRightOf="@+id/profilepic"
+        android:layout_marginBottom="16dp" />
+
     <ListView android:id="@+id/listView"
+        android:layout_marginTop="10dip"
+        android:layout_below="@id/welcome_msg"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:choiceMode="multipleChoice"/>
+
 
 </RelativeLayout>

@@ -24,6 +24,7 @@
     <string name="dateTimeDialogTitle">Select Date and Time</string>
     <string name="reminderLbl">ToDoWonders Reminder</string>
     <string name="title_activity_alarm_broadcast_receiver">AlarmBroadcastReceiverActivity</string>
+    <string name="facebook_app_id">662381537228292</string>
 
     <string name="hello_world">Hello world!</string>
 
